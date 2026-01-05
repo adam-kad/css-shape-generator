@@ -4,13 +4,13 @@ A minimal web tool for generating **CSS shapes with gradients** using sliders an
 
 Create blobs, waves and cloud-like shapes, customize colors & curves, and copy ready-to-use CSS.
 
-![Preview](assets/images/css_shape.jpg)
+![Preview](assets/images/)
 
 ---
 
 ## Live Demo
 
-👉 https:/adam-kad.github.io/css-shape-generator/
+👉 https://adam-kad.github.io/css-shape-generator/
 
 ---
 
