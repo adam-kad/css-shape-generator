@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Shape Generator</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='grad' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%233b82f6'/><stop offset='100%' stop-color='%238b5cf6'/></linearGradient></defs><rect width='100' height='100' rx='30' fill='url(%23grad)'/></svg>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/styles.css">
+    <script src="https://unpkg.com/@jaames/iro@5"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <div class="header-title">
+                    <h1 class="title">
+                        <i class="fas fa-shapes icon"></i>CSS Shape Generator
+                    </h1>
+                    <p class="subtitle">Create custom CSS shapes with smooth curves</p>
+                </div>
+                <a href="https://github.com/adam-kad/css-shape-generator" rel="noopener noreferrer" target="_blank" class="github-link">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                    <span id="star-count" class="star-count">•</span>
+                </a>
+            </div>
+        </header>
+
+        <div class="main-grid">
+            <div class="controls-column">
+                <div class="card">
+                    <div class="color-header">
+                        <h2 class="card-title">Colors</h2>
+                        <div class="color-buttons">
+                            <button id="color1-btn" class="color-btn" style="background: #3b82f6;"></button>
+                            <button id="color2-btn" class="color-btn" style="background: #8b5cf6;"></button>
+                        </div>
+                    </div>
+                    
+                    <div class="color-picker-wrapper">
+                        <div id="colorPicker" class="color-picker-container"></div>
+                    </div>
+                    
+                    <div class="controls-grid">
+                        <div class="control-group">
+                            <label class="control-label">Gradient Type</label>
+                            <select id="gradientType" class="select">
+                                <option value="linear">Linear</option>
+                                <option value="radial">Radial</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Angle: <span id="angleValue">90</span>°</label>
+                            <input type="range" id="angle" min="0" max="360" value="90" class="slider">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">Curve Controls</h2>
+                    <div id="blob-controls" class="controls-group">
+                        <div class="control-group">
+                            <label class="control-label">Top Left: <span id="tlValue">30</span>%</label>
+                            <input type="range" id="tl" min="0" max="100" value="30" class="slider">
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Top Right: <span id="trValue">70</span>%</label>
+                            <input type="range" id="tr" min="0" max="100" value="70" class="slider">
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Bottom Right: <span id="brValue">70</span>%</label>
+                            <input type="range" id="br" min="0" max="100" value="70" class="slider">
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Bottom Left: <span id="blValue">30</span>%</label>
+                            <input type="range" id="bl" min="0" max="100" value="30" class="slider">
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Smoothness: <span id="smoothValue">50</span>%</label>
+                            <input type="range" id="smooth" min="0" max="100" value="50" class="slider">
+                        </div>
+                    </div>
+                    
+                    <div id="wave-controls" class="controls-group hidden">
+                        <div class="control-group">
+                            <label class="control-label">Wave Height: <span id="waveHeightValue">20</span>%</label>
+                            <input type="range" id="waveHeight" min="0" max="50" value="20" class="slider">
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Wave Count: <span id="waveCountValue">2</span></label>
+                            <input type="range" id="waveCount" min="1" max="5" value="2" class="slider">
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Curve Smooth: <span id="waveSmoothValue">50</span>%</label>
+                            <input type="range" id="waveSmooth" min="0" max="100" value="50" class="slider">
+                        </div>
+                    </div>
+                    
+                    <div id="cloud-controls" class="controls-group hidden">
+                        <div class="control-group">
+                            <label class="control-label">Bump Size: <span id="bumpSizeValue">30</span>%</label>
+                            <input type="range" id="bumpSize" min="10" max="80" value="30" class="slider">
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Bump Count: <span id="bumpCountValue">3</span></label>
+                            <input type="range" id="bumpCount" min="1" max="6" value="3" class="slider">
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Soft Edges: <span id="softEdgesValue">60</span>%</label>
+                            <input type="range" id="softEdges" min="0" max="100" value="60" class="slider">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="preview-column">
+                <div class="card">
+                    <div class="preview-header">
+                        <h2 class="card-title">Preview</h2>
+                        <button id="resetPreview" class="reset-btn">Reset</button>
+                    </div>
+                    <div class="preview-wrapper">
+                        <div id="preview" class="preview-container"></div>
+                    </div>
+                </div>
+
+                <div class="card dark-card">
+                    <div class="output-header">
+                        <h2 class="card-title">CSS Output</h2>
+                        <button id="copyBtn" class="copy-btn">
+                            <i class="fas fa-copy"></i>Copy
+                        </button>
+                    </div>
+                    <pre id="cssOutput" class="css-output"></pre>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>CSS Shape Generator</p>
+        </footer>
+    </div>
+
+    <script src="assets/script.js"></script>
+    <script>
+        async function fetchGitHubStars() {
+            try {
+                const response = await fetch('https://api.github.com/repos/adam-kad/css-shape-generator');
+                const data = await response.json();
+                const starCount = data.stargazers_count;
+                const starElement = document.getElementById('star-count');
+                starElement.textContent = starCount.toLocaleString();
+                starElement.title = `${starCount} stars on GitHub`;
+            } catch (error) {
+                console.log('Could not fetch GitHub stars:', error);
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', fetchGitHubStars);
+    </script>
+</body>
+</html>
